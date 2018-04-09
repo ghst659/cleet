@@ -12,6 +12,7 @@
 #include <sstream>
 
 namespace data {
+
   std::string& trim(const std::set<char>& fluff, std::string* text) {
     auto not_fluff = [&fluff](char c) {return fluff.count(c) == 0;};
     auto content_start = std::find_if(text->begin(), text->end(), not_fluff);
@@ -63,26 +64,29 @@ namespace data {
     std::transform(tokens.cbegin(), tokens.cend(), std::back_inserter(nodes),
                    [](const std::string& s) -> TreeNode* {
                      if (s == "null") {
-                       std::cerr << "null node: " << std::endl;
+                       // std::cerr << "null node: " << std::endl;
                        return nullptr;
                      } else {
-                       std::cerr << "new node: " << s << std::endl;
+                       // std::cerr << "new node: " << s << std::endl;
                        int value = std::stoi(s);
                        return new TreeNode(value);
                      }
                    });
+    std::deque<TreeNode*> parents;
     for (size_t i = 0; i < nodes.size(); ++i) {
       auto current = nodes[i];
       if (i == 0) {
         result = current;
+      } else if (parents.size() > 0) {
+        if (i % 2 != 0) {
+          parents.front()->left = current;
+        } else {
+          parents.front()->right = current;
+          parents.pop_front();
+        }
       }
       if (current != nullptr) {
-        if (++i < nodes.size()) {
-          current->left = nodes[i];
-        }
-        if (++i < nodes.size()) {
-          current->right = nodes[i];
-        }
+        parents.push_back(current);
       }
     }
     return result;
