@@ -62,15 +62,8 @@ namespace data {
     std::vector<std::string> tokens = split(fluff, spec);
     std::vector<TreeNode*> nodes;
     std::transform(tokens.cbegin(), tokens.cend(), std::back_inserter(nodes),
-                   [](const std::string& s) -> TreeNode* {
-                     if (s == "null") {
-                       // std::cerr << "null node: " << std::endl;
-                       return nullptr;
-                     } else {
-                       // std::cerr << "new node: " << s << std::endl;
-                       int value = std::stoi(s);
-                       return new TreeNode(value);
-                     }
+                   [](const std::string& token) -> TreeNode* {
+                     return token == "null" ? nullptr : new TreeNode(std::stoi(token));
                    });
     std::deque<TreeNode*> parents;
     for (size_t i = 0; i < nodes.size(); ++i) {
