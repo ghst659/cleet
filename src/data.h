@@ -31,5 +31,9 @@ namespace data {
   void delete_tree(TreeNode* root);
   // Returns a list of TreeNode values in BFS order.
   std::vector<std::string> list_tree(const TreeNode* root);
+  // Creates a ListNode* list based on the integer list
+  ListNode* make_list(const char* values);
+  // Deletes a list from the tail to the head.
+  void delete_list(ListNode* head);
 } // namespace data
 #endif // CLEET_DATA_H_

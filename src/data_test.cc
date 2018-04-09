@@ -64,4 +64,14 @@ namespace {
     // EXPECT_EQ(3, root->right->left->val);
     data::delete_tree(root);
   }
+
+  TEST(ListNodeTest, ListConstruction) {
+    const char* spec = "[10,11,12]";
+    ListNode* head = data::make_list(spec);
+    EXPECT_EQ(10, head->val);
+    EXPECT_EQ(11, head->next->val);
+    EXPECT_EQ(12, head->next->next->val);
+    EXPECT_EQ(nullptr, head->next->next->next);
+  }
+
 }  // namespace

@@ -111,4 +111,31 @@ namespace data {
     return result;
   }
 
+  ListNode* make_list(const char* values) {
+    ListNode* head = nullptr;
+    std::string spec(values);
+    std::set<char> fluff{',', ' ', '{', '}', '[', ']'};
+    std::vector<std::string> tokens = split(fluff, spec);
+    ListNode* previous = nullptr;
+    for (const std::string& token : tokens) {
+      int value = std::stoi(token);
+      ListNode* current = new ListNode(value);
+      if (head == nullptr) {
+        head = current;
+      } else {
+        previous->next = current;
+      }
+      previous = current;
+    }
+    return head;
+  }
+
+  void delete_list(ListNode* head) {
+    ListNode* next = nullptr;
+    for (; head != nullptr; head = next) {
+      next = head->next;
+      delete head;
+    }
+  }
+
 } // namespace data
