@@ -28,17 +28,22 @@ namespace {
   TEST(Permutations, Examples) {
     Solution s;
     std::vector<std::vector<int>> inputs{
-      {1,2,3} // , {4,5}
+      {1,2,3}
+      , {4,5}
     };
-    std::vector<std::vector<std::vector<int>>> outputs{
-      {{1,2,3}, {1,3,2}, {2,1,3}, {2,3,1}, {3,1,2}, {3,2,1}}
-      // , {{4,5}, {5,4}}
-        };
+    std::vector<std::set<std::vector<int>>> outputs{
+      {{1,2,3}, {1,3,2}, {2,1,3}, {2,3,1}, {3,2,1}, {3,1,2}}
+      , {{4,5}, {5,4}}
+    };
     for (size_t i = 0; i < inputs.size(); ++i) {
       const std::vector<int>& nums(inputs.at(i));
-      const std::vector<std::vector<int>>& want(outputs.at(i));
+      const std::set<std::vector<int>>& want(outputs.at(i));
       const std::vector<std::vector<int>>& got(s.permute(nums));
-      EXPECT_EQ(got, want);
+      std::set<std::vector<int>> gots;
+      for (const auto& item : got) {
+        gots.insert(item);
+      }
+      EXPECT_EQ(gots, want);
     }
   }
 }  // namespace
