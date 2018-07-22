@@ -7,6 +7,7 @@
 #include "count_and_say.h"
 #include "gtest/gtest.h"
 
+#include <iostream>
 #include <vector>
 
 namespace {
@@ -32,8 +33,16 @@ namespace {
 
   TEST(CountAndSayTest, Examples) {
     Solution s;
-    int inputs[] = {1, 4};
-    std::string outputs[] = {"1", "1211"};
-    std::string got = s.CountAndSay(n);
+    std::vector<int> inputs{7, 1, 8, 2, 3, 4, 5, 6};
+    std::vector<std::string> outputs{
+      "13112221", "1", "1113213211", "11", "21", "1211", "111221", "312211"
+        };
+    for (size_t i = 0; i < inputs.size(); ++i) {
+      const int n(inputs.at(i));
+      const std::string& want(outputs.at(i));
+      const std::string& got(s.countAndSay(n));
+      // std::cerr << "#" << i << ": n = " << n << "; want = " << want << "; got = " << got << std::endl;
+      EXPECT_EQ(got, want);
+    }
   }
 }  // namespace

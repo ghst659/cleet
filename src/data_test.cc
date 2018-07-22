@@ -3,10 +3,9 @@
 //
 // Don't forget gtest.h, which declares the testing framework.
 
-#include <limits.h>
 #include "data.h"
 #include "gtest/gtest.h"
-
+#include <limits.h>
 #include <vector>
 #include <string>
 #include <set>

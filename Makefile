@@ -29,7 +29,7 @@ CXXFLAGS += -g -Wall -Wextra -pthread -std=c++17
 
 # All tests produced by this Makefile.  Remember to add new tests you
 # created to the list.
-TESTS = sample1_test data_test two_sum_test
+TESTS = sample1_test data_test two_sum_test count_and_say_test
 
 # All Google Test headers.  Usually you shouldn't change this
 # definition.
@@ -89,4 +89,9 @@ data_test: data_test.o data.o gtest_main.a
 two_sum_test.o: $(USER_DIR)/two_sum_test.cc $(USER_DIR)/two_sum.h $(GTEST_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/two_sum_test.cc
 two_sum_test: two_sum_test.o data.o gtest_main.a
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
+##############################################################################
+count_and_say_test.o: $(USER_DIR)/count_and_say_test.cc $(USER_DIR)/count_and_say.h $(GTEST_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/count_and_say_test.cc
+count_and_say_test: count_and_say_test.o data.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
