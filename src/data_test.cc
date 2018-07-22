@@ -12,6 +12,37 @@
 #include <utility>
 
 namespace {
+  TEST(ComparisonTest, Vectors) {
+    std::vector<int> a{1,2,3}, b{1,2,3}, c{1,2,4},  d{1,8,3}, e{3,2,1};
+    EXPECT_EQ(a, b);
+    EXPECT_NE(a, c);
+    EXPECT_GT(c, a);
+    EXPECT_GT(d, a);
+    EXPECT_NE(e, a);
+    EXPECT_GT(e, a);
+  }
+
+  TEST(ComparisonTest, Sets) {
+    std::set<int> a{1,2,3}, b{1,2,3}, c{1,2,4},  d{1,8,3}, e{3,2,1};
+    EXPECT_EQ(a, b);
+    EXPECT_NE(a, c);
+    EXPECT_GT(c, a);
+    EXPECT_GT(d, a);
+    EXPECT_EQ(e, a);
+  }
+
+  TEST(ComparisonTest, SetsOfVectors) {
+    std::vector<int> a{1,2,3}, b{1,2,3}, c{1,2,4},  d{1,8,3}, e{3,2,1};
+    std::vector<std::vector<int>> p{a, b, c};
+    std::set<std::vector<int>> ab{a,b}, ba{b,a}, ae{a,e}, ac{a,c}, q;
+    EXPECT_EQ(ab, ba);
+    EXPECT_NE(ab, ae);
+    for (const auto& x : p) {
+      q.insert(x);
+    }
+    EXPECT_EQ(q, ac);
+  }
+
   TEST(UtilityTest, Trimming) {
     std::set<char> fluff{'[', ']', '{', '}'};
     std::vector<std::pair<const char*, const char*> > test_cases = {
