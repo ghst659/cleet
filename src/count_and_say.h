@@ -6,22 +6,22 @@
 #include <string>
 #include <map>
 
-const std::string DIGITS{"0123456789"};
+constexpr char DIGITS[] = "0123456789";
 
 class Solution {
 private:
   static void close(char seq_char, int seq_count, std::string& result) {
-    result.append(1, DIGITS.at(seq_count));
+    if (seq_count < 10) {
+      result.append(1, DIGITS[seq_count]);
+    } else {
+      result.append(std::to_string(seq_count));
+    }
     result.append(1, seq_char);
   }
 
   std::map<int, std::string> cache_;
 
 public:
-  Solution() {
-    cache_.clear();
-  }
-
   std::string countAndSay(int n) {
     std::string result{"1"};
     if (n > 1) {
@@ -45,8 +45,8 @@ public:
         }
       }
       close(seq_char, seq_count, result);
+      cache_.insert(std::map<int, std::string>::value_type(n, result));
     }
-    cache_.insert(std::map<int, std::string>::value_type(n, result));
     return result;
   }
 };
