@@ -44,7 +44,7 @@ namespace {
   }
 
   TEST(StringViewTest, ToString) {
-    const char kText[] = "the quick brown fox jumps over the lazy dog.";
+    constexpr char kText[] = "the quick brown fox jumps over the lazy dog.";
     std::string_view v(kText);
     std::string real_string(v);
     EXPECT_EQ(real_string, v);
