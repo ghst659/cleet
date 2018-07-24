@@ -43,6 +43,16 @@ namespace {
     EXPECT_EQ(q, ac);
   }
 
+  TEST(StringViewTest, ToString) {
+    const char kText[] = "the quick brown fox jumps over the lazy dog.";
+    std::string_view v(kText);
+    std::string real_string(v);
+    EXPECT_EQ(real_string, v);
+    EXPECT_EQ(real_string, kText);
+    real_string[0] = 'X';
+    EXPECT_NE(real_string, kText);
+  }
+
   TEST(UtilityTest, Trimming) {
     std::set<char> fluff{'[', ']', '{', '}'};
     std::vector<std::pair<const char*, const char*> > test_cases = {
