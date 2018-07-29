@@ -14,14 +14,15 @@ private:
     }
     for (size_t k = 0; k < choices.size(); ++k) {
       trace.push_back(choices.at(k));
-
-      std::vector<int> next_choices;
-      for (size_t j = 0; j < choices.size(); ++j) {
-        if (j != k) {
-          next_choices.push_back(choices.at(j));
+      {
+        std::vector<int> next_choices;
+        for (size_t j = 0; j < choices.size(); ++j) {
+          if (j != k) {
+            next_choices.push_back(choices.at(j));
+          }
         }
+        helper(next_choices, trace, result);
       }
-      helper(next_choices, trace, result);
       trace.pop_back();
     }
   }
