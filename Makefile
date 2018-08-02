@@ -38,6 +38,8 @@ GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
 
 # House-keeping build targets.
 
+.PHONY: all clean
+
 all : $(TESTS)
 
 clean :
@@ -81,22 +83,27 @@ sample1_test : sample1.o sample1_test.o gtest_main.a
 ##############################################################################
 data.o: $(USER_DIR)/data.cc $(USER_DIR)/data.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/data.cc
-data_test.o: $(USER_DIR)/data_test.cc $(USER_DIR)/data.h $(GTEST_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/data_test.cc
-data_test: data_test.o data.o gtest_main.a
+# data_test.o: $(USER_DIR)/data_test.cc $(USER_DIR)/data.h $(GTEST_HEADERS)
+# 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/data_test.cc
+# data_test: data_test.o data.o gtest_main.a
+# 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
+##############################################################################
+%_test.o: $(USER_DIR)/%_test.cc $(USER_DIR)/%.h $(GTEST_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $<
+%_test: %_test.o data.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
 ##############################################################################
-two_sum_test.o: $(USER_DIR)/two_sum_test.cc $(USER_DIR)/two_sum.h $(GTEST_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/two_sum_test.cc
-two_sum_test: two_sum_test.o data.o gtest_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
-##############################################################################
-count_and_say_test.o: $(USER_DIR)/count_and_say_test.cc $(USER_DIR)/count_and_say.h $(GTEST_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/count_and_say_test.cc
-count_and_say_test: count_and_say_test.o data.o gtest_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
-##############################################################################
-permutations_test.o: $(USER_DIR)/permutations_test.cc $(USER_DIR)/permutations.h $(GTEST_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/permutations_test.cc
-permutations_test: permutations_test.o data.o gtest_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
+# two_sum_test.o: $(USER_DIR)/two_sum_test.cc $(USER_DIR)/two_sum.h $(GTEST_HEADERS)
+# 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/two_sum_test.cc
+# two_sum_test: two_sum_test.o data.o gtest_main.a
+# 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
+
+# count_and_say_test.o: $(USER_DIR)/count_and_say_test.cc $(USER_DIR)/count_and_say.h $(GTEST_HEADERS)
+# 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/count_and_say_test.cc
+# count_and_say_test: count_and_say_test.o data.o gtest_main.a
+# 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
+
+# permutations_test.o: $(USER_DIR)/permutations_test.cc $(USER_DIR)/permutations.h $(GTEST_HEADERS)
+# 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/permutations_test.cc
+# permutations_test: permutations_test.o data.o gtest_main.a
+# 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
