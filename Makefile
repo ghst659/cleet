@@ -29,7 +29,7 @@ CXXFLAGS += -g -Wall -Wextra -pthread -std=c++17
 
 # All tests produced by this Makefile.  Remember to add new tests you
 # created to the list.
-PIECES := data two_sum count_and_say permutations
+PIECES := data two_sum count_and_say permutations binary_tree_right_side_view
 TESTS := $(addsuffix _test,$(PIECES))
 
 # All Google Test headers.  Usually you shouldn't change this
@@ -75,10 +75,8 @@ gtest_main.a : gtest-all.o gtest_main.o
 # function.
 # sample1.o : $(USER_DIR)/sample1.cc $(USER_DIR)/sample1.h $(GTEST_HEADERS)
 # 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/sample1.cc
-
 # sample1_test.o : $(USER_DIR)/sample1_test.cc $(USER_DIR)/sample1.h $(GTEST_HEADERS)
 # 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/sample1_test.cc
-
 # sample1_test : sample1.o sample1_test.o gtest_main.a
 # 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
 ##############################################################################
@@ -93,6 +91,8 @@ data.o: $(USER_DIR)/data.cc $(USER_DIR)/data.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $<
 %_test: %_test.o data.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
+%: %_test
+	./$<
 ##############################################################################
 # two_sum_test.o: $(USER_DIR)/two_sum_test.cc $(USER_DIR)/two_sum.h $(GTEST_HEADERS)
 # 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/two_sum_test.cc
