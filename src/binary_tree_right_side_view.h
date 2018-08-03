@@ -2,17 +2,10 @@
 #define CLEET_BINARY_TREE_RIGHT_SIDE_VIEW_H_
 #include <deque>
 #include <vector>
+#include "data.h"
 
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
 typedef std::pair<size_t, TreeNode*> QNode;
+
 class Solution {
 private:
   void maybe_enqueue(size_t depth, TreeNode* n, std::deque<QNode>& queue) {
