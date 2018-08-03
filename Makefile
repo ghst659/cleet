@@ -29,7 +29,8 @@ CXXFLAGS += -g -Wall -Wextra -pthread -std=c++17
 
 # All tests produced by this Makefile.  Remember to add new tests you
 # created to the list.
-TESTS = sample1_test data_test two_sum_test count_and_say_test permutations_test
+PIECES := data two_sum count_and_say permutations
+TESTS := $(addsuffix _test,$(PIECES))
 
 # All Google Test headers.  Usually you shouldn't change this
 # definition.
@@ -72,14 +73,14 @@ gtest_main.a : gtest-all.o gtest_main.o
 # Builds a sample test.  A test should link with either gtest.a or
 # gtest_main.a, depending on whether it defines its own main()
 # function.
-sample1.o : $(USER_DIR)/sample1.cc $(USER_DIR)/sample1.h $(GTEST_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/sample1.cc
+# sample1.o : $(USER_DIR)/sample1.cc $(USER_DIR)/sample1.h $(GTEST_HEADERS)
+# 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/sample1.cc
 
-sample1_test.o : $(USER_DIR)/sample1_test.cc $(USER_DIR)/sample1.h $(GTEST_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/sample1_test.cc
+# sample1_test.o : $(USER_DIR)/sample1_test.cc $(USER_DIR)/sample1.h $(GTEST_HEADERS)
+# 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/sample1_test.cc
 
-sample1_test : sample1.o sample1_test.o gtest_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
+# sample1_test : sample1.o sample1_test.o gtest_main.a
+# 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
 ##############################################################################
 data.o: $(USER_DIR)/data.cc $(USER_DIR)/data.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/data.cc
