@@ -29,7 +29,7 @@ CXXFLAGS += -g -Wall -Wextra -pthread -std=c++17
 
 # All tests produced by this Makefile.  Remember to add new tests you
 # created to the list.
-PIECES := data two_sum count_and_say permutations binary_tree_right_side_view
+PIECES := data two_sum count_and_say permutations binary_tree_right_side_view combination_sum
 TESTS := $(addsuffix _test,$(PIECES))
 
 # All Google Test headers.  Usually you shouldn't change this
