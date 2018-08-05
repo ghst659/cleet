@@ -59,16 +59,17 @@ namespace {
     Solution s;
     std::vector<std::vector<int>> gas_list{
         {1, 2, 3, 4, 5},
-        {2, 3, 4}
+        {2, 3, 4},
+        {3, 1, 1},
+        {1, 2, 3, 4, 5, 5, 70}
     };
     std::vector<std::vector<int>> cost_list{
         {3, 4, 5, 1, 2},
-        {3, 4, 3}
+        {3, 4, 3},
+        {1, 2, 2},
+        {2, 3, 4, 3, 9, 6, 2}
     };
-    std::vector<int> expected{
-        3,
-        -1
-    };
+    std::vector<int> expected{3, -1, 0, 6};
     for (size_t i = 0; i < gas_list.size(); ++i) {
         std::vector<int>& gas(gas_list.at(i));
         std::vector<int>& cost(cost_list.at(i));
