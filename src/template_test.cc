@@ -11,25 +11,21 @@
 #include <iostream>
 
 namespace {
+    /*
+     *
+     */
+    TEST(Template, Examples) {
+        Solution s;
+        std::vector<std::string> inputs{
+        };
+        std::vector<std::vector<int>> outputs{
+        };
+        for (size_t i = 0; i < inputs.size(); ++i) {
+            const std::string& feed(inputs.at(i));
+            const std::vector<int>& want(outputs.at(i));
 
-  /*
-   *
-   */
-
-  TEST(Template, Examples) {
-    Solution s;
-    std::vector<std::string> inputs{
-      "",
-    };
-    std::vector<std::vector<int>> outputs{
-      {},
-    };
-    for (size_t i = 0; i < inputs.size(); ++i) {
-      const std::string& feed(inputs.at(i));
-      const std::vector<int>& want(outputs.at(i));
-
-      const std::vector<int> got;
-      EXPECT_EQ(got, want);
-    }
-  }
+            const std::vector<int> got;
+            EXPECT_EQ(got, want);
+        }
+    } // TEST
 }  // namespace
